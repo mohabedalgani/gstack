@@ -9,89 +9,103 @@ struct BoardView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let side = min(geo.size.width, geo.size.height)
-            let cell = (side - spacing * CGFloat(model.cols - 1)) / CGFloat(model.cols)
-
-            ZStack {
-                LazyVGrid(
-                    columns: Array(repeating: GridItem(.fixed(cell), spacing: spacing), count: model.cols),
-                    spacing: spacing
-                ) {
-                    ForEach(0..<model.rows, id: \.self) { r in
-                        ForEach(0..<model.cols, id: \.self) { c in
-                            let pos = GridPos(row: r, col: c)
-                            let tile = model.board[r][c]
-                            TileView(
-                                tile: tile,
-                                isOnPath: model.path.contains(pos),
-                                isBad: model.flashBad.contains(pos),
-                                isVanishing: model.vanishing.contains(pos),
-                                motion: model.motions[tile.id],
-                                cellSize: cell,
-                                spacing: spacing
-                            )
-                            .background(
-                                GeometryReader { tileGeo in
-                                    Color.clear.preference(
-                                        key: CellFrameKey.self,
-                                        value: [pos: tileGeo.frame(in: .named("board"))]
-                                    )
-                                }
-                            )
-                        }
-                    }
-                }
-                .frame(width: side, height: side)
-
-                PathOverlay(path: model.path, frames: cellFrames)
-                    .allowsHitTesting(false)
-
-                ForEach(model.ghostTiles) { ghost in
-                    let target = model.mergeOrigin ?? ghost.start
-                    let t = ghost.progress
-                    let x = ghost.start.x + (target.x - ghost.size.width / 2 - ghost.start.x) * t
-                    let y = ghost.start.y + (target.y - ghost.size.height / 2 - ghost.start.y) * t
-                    Text(ghost.text)
-                        .font(.system(size: max(14, cell * 0.28), weight: .bold, design: .serif))
-                        .foregroundStyle(JumlaTheme.tileInk)
-                        .frame(width: ghost.size.width, height: ghost.size.height)
-                        .background(JumlaTheme.tileColors[ghost.tint], in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .scaleEffect(ghost.isLast ? 1.08 : max(0.45, 1 - 0.45 * t))
-                        .opacity(ghost.isLast ? 1 : max(0.2, 1 - 0.7 * t))
-                        .shadow(color: JumlaTheme.glow.opacity(0.5), radius: 10)
-                        .position(x: x + ghost.size.width / 2, y: y + ghost.size.height / 2)
-                        .allowsHitTesting(false)
-                }
-
-                ForEach(model.particles) { p in
-                    Circle()
-                        .fill(p.color)
-                        .frame(width: 10, height: 10)
-                        .shadow(color: p.color.opacity(0.8), radius: 4)
-                        .modifier(BurstMove(particle: p))
-                        .allowsHitTesting(false)
-                }
-
-                if let origin = model.mergeOrigin {
-                    Circle()
-                        .stroke(JumlaTheme.glow, lineWidth: 3)
-                        .frame(width: cell * 0.9, height: cell * 0.9)
-                        .position(origin)
-                        .modifier(RingBurst())
-                        .allowsHitTesting(false)
-                }
-            }
-            .coordinateSpace(named: "board")
-            .frame(width: side, height: side)
-            .position(x: geo.size.width / 2, y: geo.size.height / 2)
-            .contentShape(Rectangle())
-            .gesture(dragGesture(cell: cell, side: side))
-            .allowsHitTesting(!model.isBusy)
-            .onPreferenceChange(CellFrameKey.self) { cellFrames = $0 }
-            .onAppear { boardFrame = CGRect(x: 0, y: 0, width: side, height: side) }
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            boardContent(in: geo)
         }
         .aspectRatio(1, contentMode: .fit)
+    }
+
+    @ViewBuilder
+    private func boardContent(in geo: GeometryProxy) -> some View {
+        let side = min(geo.size.width, geo.size.height)
+        let cell = (side - spacing * CGFloat(model.cols - 1)) / CGFloat(model.cols)
+
+        ZStack {
+            tileGrid(cell: cell, side: side)
+            PathOverlay(path: model.path, frames: cellFrames)
+                .allowsHitTesting(false)
+            ghostLayer(cell: cell)
+            particleLayer
+            mergeRing(cell: cell)
+        }
+        .coordinateSpace(named: "board")
+        .frame(width: side, height: side)
+        .position(x: geo.size.width / 2, y: geo.size.height / 2)
+        .contentShape(Rectangle())
+        .gesture(dragGesture(cell: cell, side: side))
+        .allowsHitTesting(!model.isBusy)
+        .onPreferenceChange(CellFrameKey.self) { cellFrames = $0 }
+        .onAppear { boardFrame = CGRect(x: 0, y: 0, width: side, height: side) }
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+    }
+
+    private func tileGrid(cell: CGFloat, side: CGFloat) -> some View {
+        LazyVGrid(
+            columns: Array(repeating: GridItem(.fixed(cell), spacing: spacing), count: model.cols),
+            spacing: spacing
+        ) {
+            ForEach(0..<model.rows, id: \.self) { r in
+                ForEach(0..<model.cols, id: \.self) { c in
+                    tileCell(row: r, col: c, cell: cell)
+                }
+            }
+        }
+        .frame(width: side, height: side)
+    }
+
+    private func tileCell(row: Int, col: Int, cell: CGFloat) -> some View {
+        let pos = GridPos(row: row, col: col)
+        let tile = model.board[row][col]
+        return TileView(
+            tile: tile,
+            isOnPath: model.path.contains(pos),
+            isBad: model.flashBad.contains(pos),
+            isVanishing: model.vanishing.contains(pos),
+            motion: model.motions[tile.id],
+            cellSize: cell,
+            spacing: spacing
+        )
+        .background(
+            GeometryReader { tileGeo in
+                Color.clear.preference(
+                    key: CellFrameKey.self,
+                    value: [pos: tileGeo.frame(in: .named("board"))]
+                )
+            }
+        )
+    }
+
+    @ViewBuilder
+    private func ghostLayer(cell: CGFloat) -> some View {
+        ForEach(model.ghostTiles) { ghost in
+            GhostTileView(
+                ghost: ghost,
+                mergeOrigin: model.mergeOrigin,
+                cell: cell
+            )
+        }
+    }
+
+    private var particleLayer: some View {
+        ForEach(model.particles) { p in
+            Circle()
+                .fill(p.color)
+                .frame(width: 10, height: 10)
+                .shadow(color: p.color.opacity(0.8), radius: 4)
+                .modifier(BurstMove(particle: p))
+                .allowsHitTesting(false)
+        }
+    }
+
+    @ViewBuilder
+    private func mergeRing(cell: CGFloat) -> some View {
+        if let origin = model.mergeOrigin {
+            Circle()
+                .stroke(JumlaTheme.glow, lineWidth: 3)
+                .frame(width: cell * 0.9, height: cell * 0.9)
+                .position(origin)
+                .modifier(RingBurst())
+                .allowsHitTesting(false)
+        }
     }
 
     private func dragGesture(cell: CGFloat, side: CGFloat) -> some Gesture {
@@ -125,6 +139,37 @@ struct BoardView: View {
     }
 }
 
+/// Flying merge ghost — kept as its own view so the board body type-checks.
+private struct GhostTileView: View {
+    let ghost: GameViewModel.GhostTile
+    let mergeOrigin: CGPoint?
+    let cell: CGFloat
+
+    var body: some View {
+        let target = mergeOrigin ?? ghost.start
+        let t = ghost.progress
+        let x = ghost.start.x + (target.x - ghost.size.width / 2 - ghost.start.x) * t
+        let y = ghost.start.y + (target.y - ghost.size.height / 2 - ghost.start.y) * t
+        let fontSize = max(14, cell * 0.28)
+        let scale = ghost.isLast ? 1.08 : max(0.45, 1 - 0.45 * t)
+        let opacity = ghost.isLast ? 1.0 : max(0.2, 1 - 0.7 * t)
+
+        Text(ghost.text)
+            .font(.system(size: fontSize, weight: .bold, design: .serif))
+            .foregroundStyle(JumlaTheme.tileInk)
+            .frame(width: ghost.size.width, height: ghost.size.height)
+            .background(
+                JumlaTheme.tileColors[ghost.tint],
+                in: RoundedRectangle(cornerRadius: 16, style: .continuous)
+            )
+            .scaleEffect(scale)
+            .opacity(opacity)
+            .shadow(color: JumlaTheme.glow.opacity(0.5), radius: 10)
+            .position(x: x + ghost.size.width / 2, y: y + ghost.size.height / 2)
+            .allowsHitTesting(false)
+    }
+}
+
 private struct TileView: View {
     let tile: WordTile
     let isOnPath: Bool
@@ -144,13 +189,7 @@ private struct TileView: View {
             .foregroundStyle(JumlaTheme.tileInk)
             .frame(width: cellSize, height: cellSize)
             .background(JumlaTheme.tileColors[tile.tint], in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .overlay {
-                if isOnPath {
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .stroke(JumlaTheme.glow, lineWidth: 3)
-                        .shadow(color: JumlaTheme.glow.opacity(0.55), radius: 8)
-                }
-            }
+            .overlay { pathHighlight }
             .scaleEffect(isOnPath ? 1.06 : (isVanishing ? 0.2 : 1))
             .opacity(isVanishing ? 0 : 1)
             .offset(x: shakeX, y: fallOffset)
@@ -162,6 +201,15 @@ private struct TileView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) { shakeX = 0 }
             }
             .animation(.easeOut(duration: 0.2), value: isVanishing)
+    }
+
+    @ViewBuilder
+    private var pathHighlight: some View {
+        if isOnPath {
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(JumlaTheme.glow, lineWidth: 3)
+                .shadow(color: JumlaTheme.glow.opacity(0.55), radius: 8)
+        }
     }
 
     private func runMotion(_ motion: TileMotion?) {
