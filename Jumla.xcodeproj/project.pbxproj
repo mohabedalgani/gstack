@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8C752DA8D95E4634ADB03635 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A03DB91F44DEA8DEC47BF /* SoundPlayer.swift */; };
+		82228AA306254983A35C8060 /* BoardLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A0FB46D5E5402E8BE42CDF /* BoardLogic.swift */; };
+		3FC23B93546145C18C6ECFB1 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CE6910CD914F75B2C83D01 /* Models.swift */; };
+		44196E6008764170B6AC24EA /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D5166235E948898F6E2476 /* Recipes.swift */; };
+		21E89D4272A840FE918ACD7F /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C5084A1E54E9F972939D8 /* BoardView.swift */; };
+		E91D518686C94999A702FCAB /* FeedbackPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9106B462F6194E2F8FFB038C /* FeedbackPanel.swift */; };
+		5026B0B44AE143C69A511C2B /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF0ED70374FD7963EFBDC /* GameView.swift */; };
+		C4BCCEF4EA134C43A6962D0D /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D158240321447A0B5DB9B2F /* GameViewModel.swift */; };
+		A0081D27AA914ECAB68A2A12 /* JumlaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76763532A60C48A8824751DE /* JumlaApp.swift */; };
+		A32B468BCD554AE8A3067749 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A702BFBDD6A425FB867D51B /* Theme.swift */; };
+		991553E6D81C42AD8F60A7DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C111F5DCF8104A6B81EC15CF /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5D8F3BD1934D48C68C4384DC /* Jumla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jumla.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		842A03DB91F44DEA8DEC47BF /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		F0A0FB46D5E5402E8BE42CDF /* BoardLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardLogic.swift; sourceTree = "<group>"; };
+		B7CE6910CD914F75B2C83D01 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		27D5166235E948898F6E2476 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
+		270C5084A1E54E9F972939D8 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		9106B462F6194E2F8FFB038C /* FeedbackPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPanel.swift; sourceTree = "<group>"; };
+		341CF0ED70374FD7963EFBDC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		7D158240321447A0B5DB9B2F /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		76763532A60C48A8824751DE /* JumlaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumlaApp.swift; sourceTree = "<group>"; };
+		4A702BFBDD6A425FB867D51B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		C111F5DCF8104A6B81EC15CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		98879A88E05C4D0BB7D918F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		E42CAB747A5F4C9380E075AC /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				7208CA5D96C64B2290D6CB0B /* Jumla */,
+				CEFB33D467DC41CDB8AAE451 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7208CA5D96C64B2290D6CB0B /* Jumla */ = {
+			isa = PBXGroup;
+			children = (
+				09E306D9959A4C4EAF543A54 /* Audio */,
+				AE8EF0D4D51E4BADACF6ABAA /* Domain */,
+				87D56C25D9A94A598A5597FF /* Game */,
+				76763532A60C48A8824751DE /* JumlaApp.swift */,
+				C24B3F8A24C84589A7CEA03A /* Theme */,
+				C111F5DCF8104A6B81EC15CF /* Assets.xcassets */,
+				98879A88E05C4D0BB7D918F1 /* Info.plist */,
+			);
+			path = Jumla;
+			sourceTree = "<group>";
+		};
+		CEFB33D467DC41CDB8AAE451 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D8F3BD1934D48C68C4384DC /* Jumla.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		09E306D9959A4C4EAF543A54 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				842A03DB91F44DEA8DEC47BF /* SoundPlayer.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		AE8EF0D4D51E4BADACF6ABAA /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F0A0FB46D5E5402E8BE42CDF /* BoardLogic.swift */,
+				B7CE6910CD914F75B2C83D01 /* Models.swift */,
+				27D5166235E948898F6E2476 /* Recipes.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		87D56C25D9A94A598A5597FF /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				270C5084A1E54E9F972939D8 /* BoardView.swift */,
+				9106B462F6194E2F8FFB038C /* FeedbackPanel.swift */,
+				341CF0ED70374FD7963EFBDC /* GameView.swift */,
+				7D158240321447A0B5DB9B2F /* GameViewModel.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		C24B3F8A24C84589A7CEA03A /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				4A702BFBDD6A425FB867D51B /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2DD55A9C00594BAF89F3913C /* Jumla */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD72F377A24E4BE8B83F049F /* Build configuration list for PBXNativeTarget "Jumla" */;
+			buildPhases = (
+				D25382544CEC4495ABDEAF34 /* Sources */,
+				AAFED7EC915F4019B409323E /* Frameworks */,
+				0E6F4ABF3242481AA71ADC72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jumla;
+			productName = Jumla;
+			productReference = 5D8F3BD1934D48C68C4384DC /* Jumla.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8318AAE98EFB40D8AA1865CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 2FED05927930469AA21701E6 /* Build configuration list for PBXProject "Jumla" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = ar;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				ar,
+				en,
+				Base,
+			);
+			mainGroup = E42CAB747A5F4C9380E075AC;
+			productRefGroup = CEFB33D467DC41CDB8AAE451 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2DD55A9C00594BAF89F3913C /* Jumla */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAFED7EC915F4019B409323E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0E6F4ABF3242481AA71ADC72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				991553E6D81C42AD8F60A7DC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D25382544CEC4495ABDEAF34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C752DA8D95E4634ADB03635 /* SoundPlayer.swift in Sources */,
+				82228AA306254983A35C8060 /* BoardLogic.swift in Sources */,
+				3FC23B93546145C18C6ECFB1 /* Models.swift in Sources */,
+				44196E6008764170B6AC24EA /* Recipes.swift in Sources */,
+				21E89D4272A840FE918ACD7F /* BoardView.swift in Sources */,
+				E91D518686C94999A702FCAB /* FeedbackPanel.swift in Sources */,
+				5026B0B44AE143C69A511C2B /* GameView.swift in Sources */,
+				C4BCCEF4EA134C43A6962D0D /* GameViewModel.swift in Sources */,
+				A0081D27AA914ECAB68A2A12 /* JumlaApp.swift in Sources */,
+				A32B468BCD554AE8A3067749 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		73E5051E292C4B688D1799AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		16FE34FA8232433B8F510360 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				VALIDATE_PRODUCT = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		0A7E741EA38343AD8DF98710 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Jumla/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jumla.mvp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DEDA628F4177444D9F8294A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Jumla/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jumla.mvp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2FED05927930469AA21701E6 /* Build configuration list for PBXProject "Jumla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73E5051E292C4B688D1799AF /* Debug */,
+				16FE34FA8232433B8F510360 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD72F377A24E4BE8B83F049F /* Build configuration list for PBXNativeTarget "Jumla" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A7E741EA38343AD8DF98710 /* Debug */,
+				DEDA628F4177444D9F8294A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8318AAE98EFB40D8AA1865CB /* Project object */;
+}
